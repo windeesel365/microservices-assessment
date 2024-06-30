@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package user;
 
-option go_package = "microecommerce/generated";
+option go_package = "pb/userpb";
 
 
 service UserService {
