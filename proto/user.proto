@@ -6,7 +6,10 @@ service UserService {
     rpc CreateUser(CreateUserRequest) returns (UserResponse);
     rpc GetUser(GetUserRequest) returns (UserResponse);
     rpc UpdateUser(UpdateUserRequest) returns (UserResponse);
+    
+    rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
 }
+
 
 message CreateUserRequest {
     string username = 1;
@@ -15,14 +18,14 @@ message CreateUserRequest {
 }
 
 message GetUserRequest {
-  int32 id = 1;
+    int32 id = 1;
 }
 
 message UpdateUserRequest {
-  int32 id = 1;
-  string username = 2;
-  string email = 3;
-  string password = 4;
+    int32 id = 1;
+    string username = 2;
+    string email = 3;
+    string password = 4;
 }
 
 message UserResponse {
@@ -31,4 +34,13 @@ message UserResponse {
     string email = 3;
     string created_at = 4;
     string updated_at = 5;
+}
+
+
+message DeleteUserRequest {
+    int32 id = 1;
+}
+
+message DeleteUserResponse {
+    bool success
 }
