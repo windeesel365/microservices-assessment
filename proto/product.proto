@@ -21,7 +21,7 @@ message CreateProductResponse {
 }
 
 message GetProductRequest {
-
+    int32 id = 1;
 }
 
 message GetProductResponse {
