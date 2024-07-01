@@ -6,6 +6,7 @@ service ProductService {
     rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse);
     rpc GetProduct(GetProductRequest) returns (GetProductResponse);
     rpc UpdateProduct(UpdateProductRequest) returns (UpdateProductResponse);
+    rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
 }
 
 message CreateProductRequest {
@@ -49,3 +50,10 @@ message UpdateProductResponse {
     bool success = 1;
 }
 
+message DeleteProductRequest {
+    int32 id = 1;
+}
+
+message DeleteProductResponse {
+    bool success = 1;
+}
