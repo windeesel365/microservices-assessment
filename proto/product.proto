@@ -5,7 +5,7 @@ package product;
 service ProductService {
     rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse);
     rpc GetProduct(GetProductRequest) returns (GetProductResponse);
-
+    rpc UpdateProduct(UpdateProductRequest) returns (UpdateProductResponse);
 }
 
 message CreateProductRequest {
@@ -35,4 +35,12 @@ message GetProductResponse {
     string updated_at = 8;
 }
 
+
+message UpdateProductRequest {
+
+}
+
+message UpdateProductResponse {
+
+}
 
