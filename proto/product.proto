@@ -46,6 +46,6 @@ message UpdateProductRequest {
 }
 
 message UpdateProductResponse {
-
+    bool success = 1;
 }
 
