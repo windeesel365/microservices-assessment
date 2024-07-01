@@ -8,9 +8,13 @@ service ProductService {
 }
 
 message CreateProductRequest {
-
+    string name = 1;
+    string description = 2;
+    float price = 3;
+    int32 category_id = 4;
+    int32 stock = 5;
 }
 
 message CreateProductResponse {
-
+    int32 id = 1;
 }
