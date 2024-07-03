@@ -32,3 +32,22 @@ func (s *server) CreateProduct(ctx context.Context, req *pb.CreateProductRequest
 	}
 	return &pb.CreateProductResponse{Id: int32(id)}, nil
 }
+
+func (s *server) GetProduct(ctx context.Context, req *pb.GetProductRequest) (*productpb.GetProductResponse, error) {
+	var product pb.GetProductResponse
+	query := "SELECT id, name, description, price, category_id, stock, created_at, updated_at FROM products WHERE id = $1"
+	err := s.db.Get(&product, query, req.GetId())
+	if err != nil {
+		return nil, err
+	}
+	return &pb.ProductResponse{
+		Id:          product.Id,
+		Name:        product.Name,
+		Description: product.Description,
+		Price:       product.Price,
+		CategoryId:  product.CategoryId,
+		Stock:       product.Stock,
+		CreatedAt:   product.CreatedAt,
+		UpdatedAt:   product.UpdatedAt,
+	}, nil
+}
