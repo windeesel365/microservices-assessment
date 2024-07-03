@@ -60,3 +60,12 @@ func (s *server) UpdateProduct(ctx context.Context, req *pb.UpdateProductRequest
 	}
 	return &pb.UpdateProductResponse{Success: true}, nil
 }
+
+func (s *server) DeleteProduct(ctx context.Context, req *pb.DeleteProductRequest) (*pb.DeleteProductResponse, error) {
+	query := "DELETE FROM products WHERE id = $1"
+	_, err := s.db.Exec(query, req.GetId())
+	if err != nil {
+		return nil, err
+	}
+	return &pb.DeleteProductResponse{Success: true}, nil
+}
