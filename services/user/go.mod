@@ -1,4 +1,4 @@
-module microecommerce
+module ecommerce-user
 
 go 1.22.3
 
