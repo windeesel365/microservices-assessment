@@ -2,9 +2,14 @@ package main
 
 import (
 	"context"
+	"log"
 	pb "microecommerce/pb/productpb"
+	"net"
+	"os"
 
 	"github.com/jmoiron/sqlx"
+	"github.com/joho/godotenv"
+	"google.golang.org/grpc"
 )
 
 type server struct {
@@ -68,4 +73,36 @@ func (s *server) DeleteProduct(ctx context.Context, req *pb.DeleteProductRequest
 		return nil, err
 	}
 	return &pb.DeleteProductResponse{Success: true}, nil
+}
+
+func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatalf("PORT is not set in the environment")
+	}
+
+	dbSource := os.Getenv("DATABASE_URL")
+	if dbSource == "" {
+		log.Fatalf("DATABASE_URL is not set in the environment")
+	}
+
+	lis, err := net.Listen("tcp", port)
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
+	}
+	s := grpc.NewServer()
+	db, err := sqlx.Connect("postgres", dbSource)
+	if err != nil {
+		log.Fatalf("failed to connect to database: %v", err)
+	}
+	pb.RegisterUserServiceServer(s, &server{db: db})
+	log.Printf("server listening at %v", lis.Addr())
+	if err := s.Serve(lis); err != nil {
+		log.Fatalf("failed to serve: %v", err)
+	}
 }
