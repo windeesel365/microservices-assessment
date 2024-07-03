@@ -33,7 +33,7 @@ func (s *server) CreateProduct(ctx context.Context, req *pb.CreateProductRequest
 	return &pb.CreateProductResponse{Id: int32(id)}, nil
 }
 
-func (s *server) GetProduct(ctx context.Context, req *pb.GetProductRequest) (*productpb.GetProductResponse, error) {
+func (s *server) GetProduct(ctx context.Context, req *pb.GetProductRequest) (*pb.GetProductResponse, error) {
 	var product pb.GetProductResponse
 	query := "SELECT id, name, description, price, category_id, stock, created_at, updated_at FROM products WHERE id = $1"
 	err := s.db.Get(&product, query, req.GetId())
@@ -50,4 +50,13 @@ func (s *server) GetProduct(ctx context.Context, req *pb.GetProductRequest) (*pr
 		CreatedAt:   product.CreatedAt,
 		UpdatedAt:   product.UpdatedAt,
 	}, nil
+}
+
+func (s *server) UpdateProduct(ctx context.Context, req *pb.UpdateProductRequest) (*pb.UpdateProductResponse, error) {
+	query := "UPDATE products SET name = $1, description = $2, price = $3, category_id = $4, stock = $5 WHERE id = $6"
+	_, err := s.db.Exec(query, req.GetName(), req.GetDescription(), req.GetPrice(), req.GetCategoryId(), req.GetStock(), req.GetId())
+	if err != nil {
+		return nil, err
+	}
+	return &pb.UpdateProductResponse{Success: true}, nil
 }
