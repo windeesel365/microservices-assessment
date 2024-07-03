@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  user:
+  user_service:
     build:
       context: .
       dockerfile: services/user/Dockerfile
@@ -16,11 +16,29 @@ services:
     restart: unless-stopped  
 
 
-  postgres:
+  product_service:
+    build:
+      context: .
+      dockerfile: services/product/Dockerfile
+    container_name: product_service
+    ports:
+      - "8081:8081"
+    env_file:
+      - ./services/product/.env
+    depends_on:
+      - postgres
+      
+    restart: unless-stopped  
+
+
+
+
+
+  user_postgres_db:
     image: postgres:16
     container_name: postgres
     environment:
-      - POSTGRES_DB=ecommercecont   
+      - POSTGRES_DB=ecommerce_user   
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
@@ -28,6 +46,20 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+
+  product_postgres_db:
+    image: postgres:16
+    container_name: postgres
+    environment:
+      - POSTGRES_DB=ecommerce_product 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data      
 
 
   pgadmin:
