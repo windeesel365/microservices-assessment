@@ -2,13 +2,14 @@ package main
 
 import (
 	"context"
+	pb "ecommerce-product/productpb"
 	"log"
-	pb "microecommerce/pb/productpb"
 	"net"
 	"os"
 
 	"github.com/jmoiron/sqlx"
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 	"google.golang.org/grpc"
 )
 
@@ -17,7 +18,7 @@ type server struct {
 	db *sqlx.DB
 }
 
-type ProductResponse struct {
+type GetProductResponse struct {
 	Id          int32   `db:"id"`
 	Name        string  `db:"name"`
 	Description string  `db:"description"`
@@ -45,7 +46,7 @@ func (s *server) GetProduct(ctx context.Context, req *pb.GetProductRequest) (*pb
 	if err != nil {
 		return nil, err
 	}
-	return &pb.ProductResponse{
+	return &pb.GetProductResponse{
 		Id:          product.Id,
 		Name:        product.Name,
 		Description: product.Description,
@@ -100,7 +101,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to connect to database: %v", err)
 	}
-	pb.RegisterUserServiceServer(s, &server{db: db})
+	pb.RegisterProductServiceServer(s, &server{db: db})
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

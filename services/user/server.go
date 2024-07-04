@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	pb "microecommerce/pb/userpb"
+	pb "ecommerce-user/userpb"
 
 	"github.com/jmoiron/sqlx"
 	"github.com/joho/godotenv"
