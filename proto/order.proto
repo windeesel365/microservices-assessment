@@ -24,9 +24,15 @@ message CreateOrderResponse {
 }
 
 message GetOrderRequest {
-
+    int32 id = 1;
 }
 
 message GetOrderResponse {
-
+    int32 id = 1;
+    int32 user_id = 2;
+    repeated OrderItem items = 3;
+    float total_amount = 4;
+    string status = 5;
+    string created_at = 6;
+    string updated_at = 7;
 }
