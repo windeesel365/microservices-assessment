@@ -7,7 +7,7 @@ service OrderService {
     rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
     rpc UpdateOrder(UpdateOrderRequest) returns (UpdateOrderResponse);
 
-    
+
 }
 
 message OrderItem {
@@ -41,9 +41,10 @@ message GetOrderResponse {
 }
 
 message UpdateOrderRequest {
-
+    int32 id = 1;
+    string status = 2;
 }
 
 message UpdateOrderResponse {
-    
+    bool success = 1;
 }
