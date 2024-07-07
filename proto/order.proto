@@ -50,9 +50,9 @@ message UpdateOrderResponse {
 }
 
 message DeleteOrderRequest {
-
+    int32 id = 1;
 }
 
 message DeleteOrderResponse {
-    
+    bool success = 1;
 }
