@@ -4,7 +4,10 @@ package order;
 
 service OrderService {
     rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
-    rpc GetOrder(GetOrderRequest) returns (GetOrderResponse)
+    rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
+    rpc UpdateOrder(UpdateOrderRequest) returns (UpdateOrderResponse);
+
+    
 }
 
 message OrderItem {
@@ -35,4 +38,12 @@ message GetOrderResponse {
     string status = 5;
     string created_at = 6;
     string updated_at = 7;
+}
+
+message UpdateOrderRequest {
+
+}
+
+message UpdateOrderResponse {
+    
 }
