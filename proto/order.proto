@@ -6,7 +6,7 @@ service OrderService {
     rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
     rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
     rpc UpdateOrder(UpdateOrderRequest) returns (UpdateOrderResponse);
-
+    rpc DeleteOrder(DeleteOrderRequest) returns (DeleteOrderResponse);
 
 }
 
@@ -47,4 +47,12 @@ message UpdateOrderRequest {
 
 message UpdateOrderResponse {
     bool success = 1;
+}
+
+message DeleteOrderRequest {
+
+}
+
+message DeleteOrderResponse {
+    
 }
