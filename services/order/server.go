@@ -59,6 +59,7 @@ func (s *server) CreateOrder(ctx context.Context, req *pb.CreateOrderRequest) (*
 	}
 
 	return &pb.CreateOrderResponse{UserId: req.UserId}, nil
+
 }
 
 func (s *server) GetOrder(ctx context.Context, req *pb.GetOrderRequest) (*pb.GetOrderResponse, error) {
