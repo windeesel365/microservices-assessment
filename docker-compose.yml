@@ -35,6 +35,7 @@ services:
     build:
       context: .
       dockerfile: services/order/Dockerfile
+   
     container_name: order_service
     ports:
       - "8082:8082"
@@ -42,6 +43,8 @@ services:
       - ./services/order/.env
     depends_on:
       - order_postgres_db
+      - user_service
+      - product_service
       
     restart: unless-stopped  
 
