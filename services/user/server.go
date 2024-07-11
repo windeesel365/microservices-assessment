@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	pb "ecommerce-user/userpb"
+	pb "github.com/windeesel365/microservices-assessment/services/user/userpb"
 
 	"github.com/jmoiron/sqlx"
 	"github.com/joho/godotenv"

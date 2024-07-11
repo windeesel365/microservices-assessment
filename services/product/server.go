@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
-	pb "ecommerce-product/productpb"
 	"log"
 	"net"
 	"os"
+
+	pb "github.com/windeesel365/microservices-assessment/services/product/productpb"
 
 	"github.com/jmoiron/sqlx"
 	"github.com/joho/godotenv"
