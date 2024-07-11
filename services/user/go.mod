@@ -1,4 +1,4 @@
-module ecommerce-user
+module github.com/windeesel365/microservices-assessment/services/user
 
 go 1.22.3
 

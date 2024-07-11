@@ -31,6 +31,21 @@ services:
     restart: unless-stopped  
 
 
+  order_service:
+    build:
+      context: .
+      dockerfile: services/order/Dockerfile
+    container_name: order_service
+    ports:
+      - "8082:8082"
+    env_file:
+      - ./services/order/.env
+    depends_on:
+      - order_postgres_db
+      
+    restart: unless-stopped  
+
+
 
 
 
@@ -59,7 +74,21 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - product_postgres_data:/var/lib/postgresql/data      
+      - product_postgres_data:/var/lib/postgresql/data    
+
+
+  order_postgres_db:
+    image: postgres:16
+    container_name: order_postgres_db
+    environment:
+      - POSTGRES_DB=ecommerce_order
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+    ports:
+      - "5434:5432"
+    volumes:
+      - order_postgres_data:/var/lib/postgresql/data          
 
 
   pgadmin:
@@ -73,6 +102,7 @@ services:
     depends_on:
       - user_postgres_db
       - product_postgres_db
+      - order_postgres_db
     restart: unless-stopped
 
 
@@ -89,6 +119,7 @@ services:
     depends_on:
       - user_postgres_db
       - product_postgres_db
+      - order_postgres_db
     restart: unless-stopped    
 
 
@@ -96,3 +127,4 @@ services:
 volumes:
   user_postgres_data:
   product_postgres_data:
+  order_postgres_data:
