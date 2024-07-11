@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	pb "ecommerce-order/orderpb"
+	pb "github.com/windeesel365/microservices-assessment/services/order/orderpb"
 
 	productpb "github.com/windeesel365/microservices-assessment/services/product/productpb"
 	userpb "github.com/windeesel365/microservices-assessment/services/user/userpb"
