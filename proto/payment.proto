@@ -46,9 +46,10 @@ message UpdatePaymentResponse {
 }
 
 message DeletePaymentRequest {
-
+    int32 id = 1;
 }
 
 message DeletePaymentResponse {
-
+    bool success = 1;
 }
+
