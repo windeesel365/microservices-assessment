@@ -35,10 +35,12 @@ message GetPaymentResponse {
 
 
 message UpdatePaymentRequest {
-   
+    int32 id = 1;
+    string status = 2;
+    string transaction_id = 3;
 }
 
 
 message UpdatePaymentResponse {
-   
+    bool success = 1;
 }
