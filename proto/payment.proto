@@ -3,7 +3,14 @@ syntax = "proto3";
 package payment;
 
 service PaymentService {
+    rpc CreatePayment(CreatePaymentRequest) returns CreatePayment(CreatePaymentResponse);
+
+}
+
+message CreatePaymentRequest {
+
+}
+
+message CreatePaymentResponse {
     
-
-
 }
