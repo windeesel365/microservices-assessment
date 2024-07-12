@@ -6,7 +6,7 @@ service PaymentService {
     rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse);
     rpc GetPayment(GetPaymentRequest) returns (GetPaymentResponse);
     rpc UpdatePayment(UpdatePaymentRequest) returns (UpdatePaymentResponse);
-
+    rpc DeletePayment(DeletePaymentRequest) returns (DeletePaymentResponse);
 }
 
 message CreatePaymentRequest {
@@ -43,4 +43,12 @@ message UpdatePaymentRequest {
 
 message UpdatePaymentResponse {
     bool success = 1;
+}
+
+message DeletePaymentRequest {
+
+}
+
+message DeletePaymentResponse {
+
 }
