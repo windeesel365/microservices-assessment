@@ -5,6 +5,7 @@ package payment;
 service PaymentService {
     rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse);
     rpc GetPayment(GetPaymentRequest) returns (GetPaymentResponse);
+    rpc UpdatePayment(UpdatePaymentRequest) returns (UpdatePaymentResponse);
 
 }
 
@@ -32,3 +33,12 @@ message GetPaymentResponse {
     string create_at = 7;
 }
 
+
+message UpdatePaymentRequest {
+   
+}
+
+
+message UpdatePaymentResponse {
+   
+}
