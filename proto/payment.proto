@@ -3,7 +3,8 @@ syntax = "proto3";
 package payment;
 
 service PaymentService {
-    rpc CreatePayment(CreatePaymentRequest) returns CreatePayment(CreatePaymentResponse);
+    rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse);
+    rpc GetPayment(GetPaymentRequest) returns (GetPaymentResponse);
 
 }
 
@@ -15,4 +16,12 @@ message CreatePaymentRequest {
 
 message CreatePaymentResponse {
     int32 id = 1;
+}
+
+message GetPaymentRequest {
+
+}
+
+message GetPaymentResponse {
+
 }
