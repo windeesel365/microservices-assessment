@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net"
 	"os"
@@ -171,10 +170,6 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	fmt.Println(lis)
-	fmt.Println("successfully connected to product service port")
-	fmt.Println(dbSource)
-
 	s := grpc.NewServer()
 	db, err := sqlx.Connect("postgres", dbSource)
 	if err != nil {
@@ -190,8 +185,5 @@ func main() {
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
-
-	fmt.Println(s)
-	fmt.Println(db)
 
 }
