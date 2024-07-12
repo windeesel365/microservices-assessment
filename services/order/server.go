@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net"
 	"os"
@@ -151,6 +152,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to connect to user service: %v", err)
 	}
+
 	defer userConn.Close()
 
 	//ต่อกับ productService
@@ -158,6 +160,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to connect to product service: %v", err)
 	}
+
 	defer productConn.Close()
 
 	userClient := userpb.NewUserServiceClient(userConn)
@@ -167,11 +170,17 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
+
+	fmt.Println(lis)
+	fmt.Println("successfully connected to product service port")
+	fmt.Println(dbSource)
+
 	s := grpc.NewServer()
 	db, err := sqlx.Connect("postgres", dbSource)
 	if err != nil {
 		log.Fatalf("failed to connect to database: %v", err)
 	}
+
 	pb.RegisterOrderServiceServer(s, &server{
 		db:            db,
 		userClient:    userClient,
@@ -181,4 +190,8 @@ func main() {
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
+
+	fmt.Println(s)
+	fmt.Println(db)
+
 }

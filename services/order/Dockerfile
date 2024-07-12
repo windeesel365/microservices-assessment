@@ -16,6 +16,7 @@ RUN go get github.com/jmoiron/sqlx
 RUN go get github.com/joho/godotenv
 RUN go get github.com/lib/pq
 RUN go get google.golang.org/grpc
+RUN go get google.golang.org/grpc/credentials/insecure
 
 RUN go get github.com/windeesel365/microservices-assessment/services/user
 RUN go get github.com/windeesel365/microservices-assessment/services/product
