@@ -8,9 +8,11 @@ service PaymentService {
 }
 
 message CreatePaymentRequest {
-
+    int32 order_id = 1;
+    float amount = 2;
+    string payment_method = 3;
 }
 
 message CreatePaymentResponse {
-    
+    int32 id = 1;
 }
