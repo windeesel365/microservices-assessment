@@ -32,7 +32,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to connect to database: %v", err)
 	}
-	pb.RegisterUserServiceServer(s, &handlers.Server{db: db})
+	pb.RegisterUserServiceServer(s, &handlers.Server{DB: db})
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
