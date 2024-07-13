@@ -87,7 +87,7 @@ func (s *Server) DeleteOrder(ctx context.Context, req *pb.DeleteOrderRequest) (*
 	return &pb.DeleteOrderResponse{Success: true}, nil
 }
 
-func convertOrderItemsToPB(items []OrderItem) []*pb.OrderItem {
+func convertOrderItemsToPB(items []models.OrderItem) []*pb.OrderItem {
 	var pbItems []*pb.OrderItem
 	for _, item := range items {
 		pbItems = append(pbItems, &pb.OrderItem{
