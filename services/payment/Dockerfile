@@ -32,7 +32,7 @@ FROM alpine:latest
 WORKDIR /root/
 
 COPY --from=builder /app/myapp4 .
-COPY --from=builder /app/services/order/.env .
+COPY --from=builder /app/services/payment/.env .
 
 EXPOSE 8083
 
