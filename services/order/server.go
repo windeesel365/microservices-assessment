@@ -68,10 +68,11 @@ func main() {
 	}
 
 	pb.RegisterOrderServiceServer(s, &handlers.Server{
-		db:            db,
-		userClient:    userClient,
-		productClient: productClient,
+		DB:            db,
+		UserClient:    userClient,
+		ProductClient: productClient,
 	})
+
 	log.Printf("server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

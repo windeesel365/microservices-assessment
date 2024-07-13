@@ -17,8 +17,8 @@ import (
 type Server struct {
 	pb.UnimplementedOrderServiceServer
 	DB            *sqlx.DB
-	userClient    userpb.UserServiceClient
-	productClient productpb.ProductServiceClient
+	UserClient    userpb.UserServiceClient
+	ProductClient productpb.ProductServiceClient
 }
 
 func (s *Server) CreateOrder(ctx context.Context, req *pb.CreateOrderRequest) (*pb.CreateOrderResponse, error) {
