@@ -52,6 +52,25 @@ services:
 
 
 
+  payment_service:
+    build:
+      context: .
+      dockerfile: services/payment/Dockerfile
+   
+    container_name: payment_service
+    ports:
+      - "8082:8082"
+    env_file:
+      - ./services/payment/.env  
+
+    depends_on:
+      - payment_postgres_db
+      - order_service
+      
+
+    restart: unless-stopped  
+
+
 
 
   user_postgres_db:
@@ -95,7 +114,20 @@ services:
     volumes:
       - order_postgres_data:/var/lib/postgresql/data  
 
-          
+
+  payment_postgres_db:
+    image: postgres:16
+    container_name: payment_postgres_db
+    environment:
+      - POSTGRES_DB=ecommerce_payment
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+    ports:
+      - "5435:5432"
+    volumes:
+      - payment_postgres_data:/var/lib/postgresql/data           
+
 
 
   pgadmin:
@@ -110,6 +142,7 @@ services:
       - user_postgres_db
       - product_postgres_db
       - order_postgres_db
+      - payment_postgres_db      
     restart: unless-stopped
 
 
@@ -127,6 +160,7 @@ services:
       - user_postgres_db
       - product_postgres_db
       - order_postgres_db
+      - payment_postgres_db       
     restart: unless-stopped    
 
 
@@ -135,5 +169,6 @@ volumes:
   user_postgres_data:
   product_postgres_data:
   order_postgres_data:
+  payment_postgres_data:  
 
 
