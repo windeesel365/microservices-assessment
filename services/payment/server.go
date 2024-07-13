@@ -20,7 +20,7 @@ import (
 type server struct {
 	pb.UnimplementedPaymentServiceServer
 	db          *sqlx.DB
-	orderClient orderpb.UserServiceClient
+	orderClient orderpb.OrderServiceClient
 }
 
 type PaymentResponse struct {
